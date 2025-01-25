@@ -184,3 +184,31 @@ input[type="color"]{
   border: 3px solid;
   padding: 25px;
 }  */
+
+
+
+
+
+.draggable-item {
+  cursor: move;
+  padding: 10px;
+  margin: 5px;
+  background-color: #f0f0f0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.drop-zone {
+  min-height: 200px;
+  border: 2px dashed #ccc;
+  border-radius: 4px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.drop-zone.drag-over {
+  background-color: rgba(0, 0, 0, 0.05);
+  border-color: #999;
+}
