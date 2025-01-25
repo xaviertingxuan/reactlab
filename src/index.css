@@ -189,7 +189,7 @@ input[type="color"]{
 
 
 
-.draggable-item {
+/* .draggable-item {
   cursor: move;
   padding: 10px;
   margin: 5px;
@@ -211,4 +211,4 @@ input[type="color"]{
 .drop-zone.drag-over {
   background-color: rgba(0, 0, 0, 0.05);
   border-color: #999;
-}
+} */

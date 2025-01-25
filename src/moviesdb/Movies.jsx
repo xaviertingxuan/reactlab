@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import './Movies.css'
+// import './Movies.css'
 import SearchIcon from './search.svg'
 import { MoviesCard } from './MoviesCard'
 
