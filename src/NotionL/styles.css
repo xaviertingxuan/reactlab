@@ -13,24 +13,47 @@
     --font-primary: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
-h1{
+h1 {
     font-size: 2.5rem;
     font-weight: 700;
-    margin-bottom: 1rem;
+    margin: 2rem 0;
     color: var(--text-primary);
     text-align: center;
     letter-spacing: -0.025em;
+    position: relative;
+    z-index: 1000;
+    text-shadow: 0 2px 4px var(--shadow-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
 }
 
-.clock-container{
-    position: relative;
+h1::after {
+    content: '';
+    position: absolute;
+    bottom: -0.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background-color: var(--bg-task);
+    border-radius: 2px;
+}
+
+.clock-container {
+    position: absolute;
     top: 1rem;
     left: 1rem;
     margin: 0;
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     font-weight: 600;
     color: var(--text-primary);
     z-index: 1000;
+    padding: 1rem;
+    background-color: var(--bg-column);
+    border-radius: var(--border-radius-md);
+    box-shadow: 0 .25rem .5rem var(--shadow-color);
 }
 
 [data-theme='light'] {
@@ -152,12 +175,9 @@ body {
     box-shadow: 0 .125rem .25rem var(--shadow-color);
     border-radius: var(--border-radius-md);
     padding: 1.25rem;
-    text-align: right;
     cursor: pointer;
-}
-.task-box-cursor:hover {
-    scale: 1.02;
-    box-shadow: 0 .5rem 1rem var(--shadow-color);
+    display: flex;
+    flex-direction: column;
 }
 
 .task-box-cursor h3 {
@@ -165,9 +185,14 @@ body {
     font-weight: 600;
     margin-bottom: 0.75rem;
     color: var(--text-primary);
-    text-align: center;
+    text-align: left;
     letter-spacing: -0.01em;
     width: 100%;
+    padding-left: 0.5rem;
+}
+.task-box-cursor:hover {
+    scale: 1.02;
+    box-shadow: 0 .5rem 1rem var(--shadow-color);
 }
 
 .task-box-cursor p {
@@ -470,4 +495,38 @@ body {
 .task-due-date::before {
     content: "📅";
     margin-right: 0.5rem;
+}
+
+.due-date-display {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    background-color: var(--bg-secondary);
+    border-radius: var(--border-radius-sm);
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin: 0.5rem auto 0;
+    box-shadow: 0 2px 4px var(--shadow-color);
+    width: fit-content;
+}
+
+.task-box-cursor {
+    background-color: var(--bg-task);
+    color: var(--text-primary);
+    box-shadow: 0 .125rem .25rem var(--shadow-color);
+    border-radius: var(--border-radius-md);
+    padding: 1.25rem;
+    text-align: center;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.due-date-display:hover {
+    background-color: var(--bg-column);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px var(--shadow-color);
 }

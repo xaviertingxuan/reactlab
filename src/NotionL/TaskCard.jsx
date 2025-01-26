@@ -54,7 +54,7 @@ export const TaskCard = ({task, onEditTask, onDeleteTask}) => {
                 onMouseUp={handleClick}
             >
                 <h3>{task.title}</h3>
-                <p>Due:{new Date(task.dueDate).toLocaleDateString()}</p>
+                <p className='due-date-display'>🗓️ {new Date(task.dueDate).toLocaleDateString()}</p>
             </div>
 
             {isViewPopupOpen && (

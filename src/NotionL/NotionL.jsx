@@ -18,7 +18,7 @@ const taskColumns = [
 const initialTask = [
     {
       id: '1',
-      title: 'CRUD tasks',
+      title: '📝 CRUD tasks',
       description: 'Gather requirements and create initial documentation',
       status: 'in_progress',
       dueDate: '2024-02-20',
@@ -26,7 +26,7 @@ const initialTask = [
     },
     {
       id: '2',
-      title: 'Add Search Bar',
+      title: '🔍 Add Search Bar',
       description: 'Create component library and design tokens',
       status: 'todo',
       dueDate: '2024-02-20',
@@ -42,7 +42,7 @@ const initialTask = [
     },
     {
       id: '4',
-      title: 'API Integration',
+      title: '🖲️ API Integration',
       description: 'Implement REST API endpoints',
       status: 'todo',
       dueDate: '2024-03-20',
@@ -50,12 +50,28 @@ const initialTask = [
     },
     {
       id: '5',
-      title: 'Testing',
+      title: '🧪 Testing',
       description: 'Write unit tests for core functionality',
       status: 'completed',
       dueDate: '2024-02-20',
       priority: 'high'
     },
+    {
+     id: '6',
+     title: '☢️ React Js',
+     description: 'practice more!!!',
+     status: 'in_progress',
+     dueDate: '2024-02-28',
+     priority: 'medium'        
+    },
+    {
+     id: '7',
+     title: '💻 Practice coding',
+     description: 'practice coding',
+     status: 'todo',
+     dueDate: '2024-03-26',
+     priority: 'high'        
+    },    
   ];
 
   
