@@ -7,6 +7,7 @@ import { Clock } from '/src/components/Clock';
 import { ToggleTheme } from './ToggleTheme';
 import { SearchBar } from './SearchBar';
 import { TaskPopup } from './TaskPopup';
+import { WeatherComponent } from './WeatherComponent';
 
 
 const taskColumns = [
@@ -125,10 +126,15 @@ export const NotionL = () => {
         setTasks(tasks.filter(task => task.id !== taskId));
     };
 
+    const getTaskCount = (status) => {
+        return filteredTasks.filter(task => task.status === status).length;
+    };
+
     return (
         <>
             <h1>✅ Task Manager</h1>
             <div><Clock /></div>
+            <div><WeatherComponent /></div>
             <div><ToggleTheme /></div>
             <div className='task-container'>
                 <button 
@@ -143,7 +149,10 @@ export const NotionL = () => {
                         {taskColumns.map((column) => (
                             <Column 
                                 key={column.id}
-                                column={column}
+                                column={{
+                                    ...column,
+                                    title: `${column.title} (${getTaskCount(column.id)})`
+                                }}
                                 tasks={filteredTasks.filter((task) => task.status === column.id)}
                                 onEditTask={(task) => {
                                     setEditingTask(task);

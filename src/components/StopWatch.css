@@ -54,4 +54,44 @@
 }
 .reset-button:hover{
     background-color: hsl(205, 90%, 50%);
-} 
+}
+
+@media screen and (max-width: 768px) {
+    .stopwatch {
+        padding: 30px;
+        margin: 1rem 0;
+    }
+
+    .display {
+        font-size: 3.5rem;
+        margin-bottom: 15px;
+    }
+
+    .controls button {
+        font-size: 1.2rem;
+        padding: 8px 16px;
+        min-width: 100px;
+        margin: 3px;
+    }
+}
+
+@media screen and (max-width: 390px) {
+    .stopwatch {
+        padding: 20px;
+    }
+
+    .display {
+        font-size: 2.8rem;
+    }
+
+    .controls {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .controls button {
+        width: 100%;
+        min-width: 150px;
+    }
+}

@@ -18,7 +18,9 @@ export const Column = ({column, tasks, onEditTask, onDeleteTask}) => {
 
     return (
         <div className='column-container-box'>
-            <h2 className='column-title'>{getStatusEmoji(column.id)}</h2>
+            <h2 className='column-title'>{getStatusEmoji(column.id)}
+                <span className="task-count">{tasks.length}</span>
+            </h2>
             <div ref={setNodeRef} className="task-ref">
                 {tasks.map(task => 
                     <TaskCard 
