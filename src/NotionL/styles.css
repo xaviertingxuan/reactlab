@@ -13,6 +13,26 @@
     --font-primary: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
+h1{
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+    text-align: center;
+    letter-spacing: -0.025em;
+}
+
+.clock-container{
+    position: relative;
+    top: 1rem;
+    left: 1rem;
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    z-index: 1000;
+}
+
 [data-theme='light'] {
     --bg-primary: #f1f8f2;
     --bg-secondary: #e8f5e9;
@@ -28,10 +48,75 @@ body {
 }
 
 .task-container {
-    /* background-color: var(--bg-secondary);
-    border-radius: 2%; */
+    position: relative;
+    padding-top: 8rem;
 }
 
+.search-bar {
+    position: absolute;
+    top: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background-color: var(--bg-column);
+    border-radius: var(--border-radius-md);
+    box-shadow: 0 .25rem .5rem var(--shadow-color);
+    z-index: 10;
+    width: 90%;
+    max-width: 600px;
+}
+
+.search-button {
+    padding: 0.75rem 1.25rem;
+    border-radius: var(--border-radius-sm);
+    background-color: var(--bg-task);
+    color: var(--text-primary);
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 0 .25rem .5rem var(--shadow-color);
+}
+
+.search-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 .5rem 1rem var(--shadow-color);
+    background-color: var(--bg-column);
+}
+
+.search-button:active {
+    transform: translateY(0);
+    box-shadow: 0 .25rem .5rem var(--shadow-color);
+}
+
+.search-button svg {
+    width: 1.25rem;
+    height: 1.25rem;
+    opacity: 0.9;
+}
+
+.search-bar input {
+    padding: 0.75rem 1rem;
+    border-radius: var(--border-radius-sm);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: var(--bg-task);
+    color: var(--text-primary);
+    width: 100%;
+    font-size: 1rem;
+}
+
+.search-bar input::placeholder {
+    color: var(--text-primary);
+    opacity: 0.7;
+}
 .column-container {
     display: flex;
     gap: 2rem;
@@ -68,6 +153,11 @@ body {
     border-radius: var(--border-radius-md);
     padding: 1.25rem;
     text-align: right;
+    cursor: pointer;
+}
+.task-box-cursor:hover {
+    scale: 1.02;
+    box-shadow: 0 .5rem 1rem var(--shadow-color);
 }
 
 .task-box-cursor h3 {
@@ -155,4 +245,229 @@ body {
 .game-toggle:hover {
     transform: translateY(-2px);
     box-shadow: 0 0.5rem 1rem var(--shadow-color);
+}
+
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.popup-content {
+    background-color: var(--bg-column);
+    padding: 2rem;
+    border-radius: var(--border-radius-lg);
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 1rem 2rem var(--shadow-color);
+}
+
+.popup-content form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.popup-content input::placeholder,
+.popup-content textarea::placeholder {
+    color: var(--text-primary);
+    opacity: 0.8;
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+.popup-content input,
+.popup-content textarea,
+.popup-content select {
+    padding: 0.75rem;
+    border-radius: var(--border-radius-sm);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background-color: var(--bg-task);
+    color: var(--text-primary);
+    font-size: 1rem;
+}
+
+.popup-content select {
+    cursor: pointer;
+}
+
+.popup-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.popup-buttons button[type="submit"] {
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--border-radius-sm);
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.popup-buttons button[type="submit"]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 .25rem .5rem rgba(76, 175, 80, 0.4);
+    background-color: #43A047;
+}
+
+.popup-buttons button[type="button"] {
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--border-radius-sm);
+    background-color: transparent;
+    color: var(--text-primary);
+    border: 1px solid var(--text-primary);
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.popup-buttons button[type="button"]:hover {
+    background-color: var(--bg-task);
+    border-color: transparent;
+}
+
+.add-task-btn {
+    padding: 0.75rem 1.25rem;
+    position: relative;
+    border-radius: var(--border-radius-sm);
+    background-color: var(--bg-task);
+    color: var(--text-primary);
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 0 .25rem .5rem var(--shadow-color);
+    margin-left: 1rem;
+}
+
+.add-task-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 .5rem 1rem var(--shadow-color);
+    background-color: var(--bg-column);
+}
+
+.add-task-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 .25rem .5rem var(--shadow-color);
+}
+
+.task-description {
+    margin: 1.5rem 0;
+    line-height: 1.6;
+    font-size: 1rem;
+}
+
+.task-status {
+    color: var(--text-primary);
+    opacity: 0.8;
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+}
+
+.edit-button {
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--border-radius-sm);
+    background-color: var(--bg-task);
+    color: var(--text-primary);
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.edit-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 .25rem .5rem var(--shadow-color);
+}
+
+.close-button {
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--border-radius-sm);
+    background-color: transparent;
+    color: var(--text-primary);
+    border: 1px solid var(--text-primary);
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.close-button:hover {
+    background-color: var(--bg-task);
+    border-color: transparent;
+}
+
+.delete-button {
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--border-radius-sm);
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.delete-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 .25rem .5rem rgba(220, 53, 69, 0.4);
+    background-color: #c82333;
+}
+
+.popup-content input[type="date"] {
+    padding: 0.75rem;
+    border-radius: var(--border-radius-sm);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background-color: var(--bg-task);
+    color: var(--text-primary);
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.task-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin: 1.5rem 0;
+    padding: 1rem;
+    background-color: var(--bg-secondary);
+    border-radius: var(--border-radius-sm);
+}
+
+.task-meta p {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.95rem;
+}
+
+.task-due-date {
+    color: var(--text-primary);
+    font-weight: 500;
+    padding: 0.5rem;
+    background-color: var(--bg-task);
+    border-radius: var(--border-radius-sm);
+    margin-top: 0.5rem;
+}
+
+.task-due-date::before {
+    content: "📅";
+    margin-right: 0.5rem;
 }

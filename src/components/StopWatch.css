@@ -11,14 +11,14 @@
     align-items: center;
     /* border: 5px solid; */
     border-radius: 50px;
-    background-color: #3b4f3c;
+    --bg-task: #557656;
     padding: 70px;
 }
 .display{
     font-size: 5rem;
     font-family: monospace;
     font-weight: bold;
-    color: hsl(0, 15%, 95%);
+    --text-primary: #e8f5e9;
     text-shadow: 2px 2px hsl(0, 0%, 0%, 0.75);
     margin-bottom: 25px;
 }

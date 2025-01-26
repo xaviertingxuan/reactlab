@@ -4,6 +4,9 @@ import { Column } from './Column';
 import './styles.css'
 import { StopWatch } from '/src/components/StopWatch';
 import { Clock } from '/src/components/Clock';
+import { ToggleTheme } from './ToggleTheme';
+import { SearchBar } from './SearchBar';
+import { TaskPopup } from './TaskPopup';
 
 
 const taskColumns = [
@@ -18,51 +21,64 @@ const initialTask = [
       title: 'CRUD tasks',
       description: 'Gather requirements and create initial documentation',
       status: 'in_progress',
+      dueDate: '2024-02-20',
+      priority: 'high'
     },
     {
       id: '2',
       title: 'Add Search Bar',
       description: 'Create component library and design tokens',
       status: 'todo',
+      dueDate: '2024-02-20',
+      priority: 'medium'
     },
     {
-        id: '3',
-        title: 'Change decription to due date',
-        description: 'Create component library and design tokens',
-        status: 'todo',
-      },
+      id: '3',
+      title: 'Change Description to date',
+      description: 'Create component library and design tokens',
+      status: 'todo',
+      dueDate: '2024-02-22',
+      priority: 'low'
+    },
     {
       id: '4',
       title: 'API Integration',
       description: 'Implement REST API endpoints',
       status: 'todo',
+      dueDate: '2024-03-20',
+      priority: 'medium'
     },
     {
       id: '5',
       title: 'Testing',
       description: 'Write unit tests for core functionality',
       status: 'completed',
+      dueDate: '2024-02-20',
+      priority: 'high'
     },
   ];
+
+  
 
 
 
 export const NotionL = () => {
-    const [tasks, setTasks] = useState(initialTask);
-    const [isDarkMode, setIsDarkMode] = useState(window.matchMedia('(prefers-color-scheme: dark)').matches);
-
+    const [tasks, setTasks] = useState(() => {
+        const savedTasks = localStorage.getItem('tasks');
+        return savedTasks ? JSON.parse(savedTasks) : initialTask;
+    });
     useEffect(() => {
-        const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-        const handleChange = (e) => setIsDarkMode(e.matches);
-        
-        mediaQuery.addEventListener('change', handleChange);
-        return () => mediaQuery.removeEventListener('change', handleChange);
-    }, []);
+        localStorage.setItem('tasks', JSON.stringify(tasks));
+    }, [tasks]);
+    
+    const [searchTerm, setSearchTerm] = useState('');
 
-    const toggleTheme = () => {
-        setIsDarkMode(!isDarkMode);
-        document.documentElement.setAttribute('data-theme', isDarkMode ? 'light' : 'dark');
-    };
+    const filteredTasks = searchTerm.trim() === '' 
+    ? tasks 
+    : tasks.filter(task => 
+        task.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        task.description.toLowerCase().includes(searchTerm.toLowerCase())
+    );
 
     const handleDragEnd = (event) => {
         const {active, over} = event;
@@ -76,37 +92,69 @@ export const NotionL = () => {
             prevTasks.map((task) =>
                 task.id === taskId ? {...task, status: newStatus} : task))
     }
- 
 
-  return (
-    <>
-        <div>
-            <h1> <Clock /></h1>
-        </div>
-        <div className='task-container' data-theme={isDarkMode ? 'dark' : 'light'}>
-            <button 
-                onClick={toggleTheme}
-                className="theme-toggle"
-            >
-                {isDarkMode ? '☀️' : '🌙'}
-            </button>
-            <div className='column-container'>
-                <DndContext onDragEnd={handleDragEnd}>
-                    {taskColumns.map((column) => (
-                        <Column 
-                            key={column.id}
-                            column={column}
-                            tasks={tasks.filter((task) => task.status === column.id)}
-                        />
-                    ))}
-                </DndContext>
+    const [isPopupOpen, setIsPopupOpen] = useState(false);
+    const [editingTask, setEditingTask] = useState(null);
+
+    const handleAddTask = (newTask) => {
+        setTasks([...tasks, newTask]);
+    };
+
+    const handleEditTask = (updatedTask) => {
+        setTasks(tasks.map(task => 
+            task.id === updatedTask.id ? updatedTask : task
+        ));
+    };
+    const handleDeleteTask = (taskId) => {
+        setTasks(tasks.filter(task => task.id !== taskId));
+    };
+
+    return (
+        <>
+            <h1>✅ Task Manager</h1>
+            <div><Clock /></div>
+            <div><ToggleTheme /></div>
+            <div className='task-container'>
+                <button 
+                    className="add-task-btn"
+                    onClick={() => setIsPopupOpen(true)}
+                >
+                    + New Task
+                </button>
+                <SearchBar onSearch={setSearchTerm} />
+                <div className='column-container'>
+                    <DndContext onDragEnd={handleDragEnd}>
+                        {taskColumns.map((column) => (
+                            <Column 
+                                key={column.id}
+                                column={column}
+                                tasks={filteredTasks.filter((task) => task.status === column.id)}
+                                onEditTask={(task) => {
+                                    setEditingTask(task);
+                                    setIsPopupOpen(true);
+                                }}
+                                onDeleteTask={handleDeleteTask}
+                            />
+                        ))}
+                    </DndContext>
+                </div>
             </div>
-        </div>
-        <div>
-            <StopWatch />
-        </div>
-    </>
-  )
+            <TaskPopup 
+                isOpen={isPopupOpen}
+                onClose={() => {
+                    setIsPopupOpen(false);
+                    setEditingTask(null);
+                }}
+                onSubmit={(task) => {
+                    editingTask ? handleEditTask(task) : handleAddTask(task);
+                }}
+                editTask={editingTask}
+            />
+            <div>
+                <StopWatch />
+            </div>
+        </>
+    )
 }
 
 export default NotionL
