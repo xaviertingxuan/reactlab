@@ -72,7 +72,7 @@ export const TaskCard = ({task, onEditTask, onDeleteTask}) => {
                                 className="edit-button"
                                 onClick={() => {
                                     onEditTask(task);
-                                    setIsViewPopupOpen(false);
+                                    setIsViewPopupOpen(false); 
                                 }}
                             >
                                 Edit Task

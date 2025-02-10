@@ -10,9 +10,13 @@ import { TaskPopup } from './TaskPopup';
 import { WeatherComponent } from './WeatherComponent';
 
 
-const taskColumns = [
+const taskColumnsTodo = [
     {id: 'todo', title: 'To Do'},
+];
+const taskColumnsInprogress = [
     {id: 'in_progress', title: 'In Progress'},
+];
+const taskColumnsCompleted = [
     {id: 'completed', title: 'Completed'},
 ];
 
@@ -74,9 +78,6 @@ const initialTask = [
      priority: 'high'        
     },    
   ];
-
-  
-
 
 
 export const NotionL = () => {
@@ -144,25 +145,61 @@ export const NotionL = () => {
                     + New Task
                 </button>
                 <SearchBar onSearch={setSearchTerm} />
-                <div className='column-container'>
-                    <DndContext onDragEnd={handleDragEnd}>
-                        {taskColumns.map((column) => (
-                            <Column 
-                                key={column.id}
-                                column={{
-                                    ...column,
-                                    title: `${column.title} (${getTaskCount(column.id)})`
-                                }}
-                                tasks={filteredTasks.filter((task) => task.status === column.id)}
-                                onEditTask={(task) => {
-                                    setEditingTask(task);
-                                    setIsPopupOpen(true);
-                                }}
-                                onDeleteTask={handleDeleteTask}
-                            />
-                        ))}
-                    </DndContext>
-                </div>
+                <DndContext onDragEnd={handleDragEnd}>
+                    <div className='column-container'>
+                        <div className='column-todo'>
+                            {taskColumnsTodo.map((column) => (
+                                <Column 
+                                    key={column.id}
+                                    column={{
+                                        ...column,
+                                        title: `${column.title} (${getTaskCount(column.id)})`
+                                    }}
+                                    tasks={filteredTasks.filter((task) => task.status === column.id)}
+                                    onEditTask={(task) => {
+                                        setEditingTask(task);
+                                        setIsPopupOpen(true);
+                                    }}
+                                    onDeleteTask={handleDeleteTask}
+                                />
+                            ))}
+                        </div>
+                        <div className='column-inprogress'>
+                            {taskColumnsInprogress.map((column) => (
+                                <Column 
+                                    key={column.id}
+                                    column={{
+                                        ...column,
+                                        title: `${column.title} (${getTaskCount(column.id)})`
+                                    }}
+                                    tasks={filteredTasks.filter((task) => task.status === column.id)}
+                                    onEditTask={(task) => {
+                                        setEditingTask(task);
+                                        setIsPopupOpen(true);
+                                    }}
+                                    onDeleteTask={handleDeleteTask}
+                                />
+                            ))}
+                        </div>
+                        <div className='column-completed'>
+                            {taskColumnsCompleted.map((column) => (
+                                <Column 
+                                    key={column.id}
+                                    column={{
+                                        ...column,
+                                        title: `${column.title} (${getTaskCount(column.id)})`
+                                    }}
+                                    tasks={filteredTasks.filter((task) => task.status === column.id)}
+                                    onEditTask={(task) => {
+                                        setEditingTask(task);
+                                        setIsPopupOpen(true);
+                                    }}
+                                    onDeleteTask={handleDeleteTask}
+                                />
+                            ))}
+                        </div>
+                    </div>
+                </DndContext>
             </div>
             <TaskPopup 
                 isOpen={isPopupOpen}

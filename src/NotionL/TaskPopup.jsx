@@ -76,7 +76,7 @@ export const TaskPopup = ({isOpen, onClose, onSubmit, editTask = null}) => {
                     <div className="priority-input-container">
                         <span className="priority-emoji">🎯</span>
                         <select
-                            id="taskPiority"
+                            id="taskPiority"  // Typo: should be "taskPriority"
                             name="priority"
                             value={formData.priority}
                             onChange={(e) => setFormData({...formData, priority: e.target.value})}

@@ -17,7 +17,7 @@ export const Column = ({column, tasks, onEditTask, onDeleteTask}) => {
     });
 
     return (
-        <div className='column-container-box'>
+        <div className="column-container-box" data-status={column.id}>
             <h2 className='column-title'>{getStatusEmoji(column.id)}
                 <span className="task-count">{tasks.length}</span>
             </h2>

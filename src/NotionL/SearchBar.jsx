@@ -5,7 +5,7 @@ export const SearchBar = ({onSearch}) => {
     const [searchTerm, setSearchTerm] = useState('')
 
     const handleInputChange = (e) => {
-        const newValue = e.target.value
+        const newValue = c.target.value
         setSearchTerm(newValue)
         onSearch(newValue) // Trigger search on every input change
     }
